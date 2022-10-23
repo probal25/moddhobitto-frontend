@@ -2,6 +2,7 @@ import axios from "axios";
 
 const BASE_URL = 'http://localhost:8000/api/';
 
+
 class AuthenticationService {
     context_path = "auth/";
     signupApi(data) {
@@ -17,8 +18,14 @@ class AuthenticationService {
 
     }
 
-    signinApi() {
-        return axios.get(BASE_URL + this.context_path + "login");
+    signinApi(data) {
+        axios.post(BASE_URL + this.context_path + "login", data)
+            .then(res => {
+                console.log(res.data.token);
+                localStorage.setItem('token', res.data.token);
+            }).catch(err => {
+                console.log(err);
+        });
     }
 }
 

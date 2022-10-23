@@ -44,6 +44,7 @@ export default {
         password: this.password
       };
       AuthenticationService.signupApi(data);
+      this.$router.push('/login');
     }
   }
 }
