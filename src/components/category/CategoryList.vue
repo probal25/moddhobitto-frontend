@@ -1,25 +1,48 @@
 <template>
-  <div>
-    <v-client-table :data="tableData" :columns="columns" :options="options"></v-client-table>
+  <div class = "container">
+
+    <h1 class = "text-center"> Category List</h1>
+
+    <table class = "table table-striped">
+      <thead>
+      <tr>
+        <th> Category Id</th>
+        <th> Category Name</th>
+        <th> Category Description</th>
+      </tr>
+
+      </thead>
+      <tbody>
+      <tr v-for="category in categories" v-bind:key="category.id">
+        <td> {{category.id }}</td>
+        <td> {{category.name }}</td>
+        <td> {{category.description}}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 <script>
+import CategoryService from "@/services/CategoryService";
+
 export default {
   name: 'CategoryList',
-  data() {
+  data(){
     return {
-      columns: ["id", "name", "age"],
-      tableData: [
-        { id: 1, name: "John", age: "20" },
-        { id: 2, name: "Jane", age: "24" },
-        { id: 3, name: "Susan", age: "16" },
-        { id: 4, name: "Chris", age: "55" },
-        { id: 5, name: "Dan", age: "40" }
-      ],
-      options: {
-        // see the options API
-      }
-    };
+      categories: []
+    }
+  },
+
+  methods: {
+    getCategories(){
+      CategoryService.getCategories().then((response) => {
+        console.log(response);
+        this.categories = response.data;
+      });
+    }
+  },
+  created() {
+    this.getCategories();
   }
 }
 </script>
