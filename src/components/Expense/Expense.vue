@@ -41,9 +41,7 @@ export default {
   },
   mounted() {
     CategoryService.getCategories().then(response => {
-      // console.log(response.data);
       this.parentCategories = response.data;
-      // console.log(this.parentCategories);
     }).catch(err => {
       console.log(err);
     });
@@ -53,10 +51,13 @@ export default {
       const model_data = {
         "name": this.name,
         "parentCategoryId": this.selectedValue,
-        "type": "INCOME",
+        "type": "",
         "amount": this.amount,
         "description": this.description
       }
+      if (this.amount >= 0) model_data.type = "INCOME";
+      else model_data.type = "EXPENSE";
+
       CategoryService.addExpense(model_data).then(res => {
         console.log(res)
       }).catch(err => {

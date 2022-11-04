@@ -5,6 +5,7 @@ import Login from "@/components/authentication/Login";
 import Registration from "@/components/authentication/Registration";
 import CategoryList from "@/components/category/CategoryList";
 import Expense from "@/components/Expense/Expense";
+import Dashboard from "@/components/Dashboard/Dashboard";
 
 Vue.use(VueRouter)
 const routes = [
@@ -13,6 +14,7 @@ const routes = [
     {path: '/register', component: Registration},
     {path: '/categories', component: CategoryList},
     {path: '/add-expense', component: Expense},
+    {path: '/dashboard', component: Dashboard},
 ]
 
 const router = new VueRouter({
