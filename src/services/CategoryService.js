@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const BASE_URL = 'http://localhost:8000/api/';
-const BASE_URL = 'http://192.168.3.199:8000/api/';
+const BASE_URL = 'http://localhost:8000/api/';
+// const BASE_URL = 'http://192.168.3.199:8000/api/';
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
 
 class CategoryService {

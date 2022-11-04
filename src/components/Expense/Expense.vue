@@ -7,8 +7,8 @@
     </div>
     <div class="form-group">
       <label for="parentCategory">Add Root category</label>
-      <select class="form-control" v-model="parentCategories" name="parentCategory">
-        <option v-for="n in parentCategories" :key="n.id">{{n.name}}</option>
+      <select class="form-control" v-model="selectedValue" name="parentCategory">
+        <option v-for="n in JSON.parse(JSON.stringify(parentCategories))" :key="n.id" :value="n.id">{{n.name}}</option>
       </select>
     </div>
     <div class="form-group">
@@ -34,15 +34,15 @@ export default {
     return {
       "name": "",
       "parentCategories": [],
+      "selectedValue" : null,
       "amount": 0,
       "description": ""
     }
   },
   mounted() {
     CategoryService.getCategories().then(response => {
-      console.log(response.data);
-      this.parentCategories = response;
-
+      // console.log(response.data);
+      this.parentCategories = response.data;
       // console.log(this.parentCategories);
     }).catch(err => {
       console.log(err);
@@ -52,7 +52,7 @@ export default {
     handleSubmit() {
       const model_data = {
         "name": this.name,
-        "parentCategoryId": this.parentCategories.id,
+        "parentCategoryId": this.selectedValue,
         "type": "INCOME",
         "amount": this.amount,
         "description": this.description
